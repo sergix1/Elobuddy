@@ -1,0 +1,11 @@
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\bin\Debug\KonohaRyzeReworked.exe.config
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\bin\Debug\KonohaRyzeReworked.exe
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\bin\Debug\KonohaRyzeReworked.pdb
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\bin\Debug\EloBuddy.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\bin\Debug\EloBuddy.SDK.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\bin\Debug\SharpDX.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\bin\Debug\SharpDX.Direct3D9.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\bin\Debug\EloBuddy.Sandbox.dll
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\obj\Debug\KonohaRyzeReworked.exe
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\obj\Debug\KonohaRyzeReworked.pdb
