@@ -23,7 +23,8 @@ namespace KonohaRyzeReworked
         {
             get
             {
-
+                if(ObjectManager.Player==null)
+                Console.WriteLine("nullisimo");
                 return ObjectManager.Player;
             }
         }
@@ -37,8 +38,8 @@ namespace KonohaRyzeReworked
             }
         public RyzeMain()
         {
-            _modes = new Modes();
-            _menus = new Menus();
+            Chat.Print("ryze loaded");
+    
             Loading.OnLoadingComplete += OnLoad;
          
         }
@@ -48,12 +49,15 @@ namespace KonohaRyzeReworked
         }
         public void Draw(EventArgs drawingArgs)
         {
-            var qSpell = _menus.DrawMenu["DQ"].Cast<CheckBox>().CurrentValue;
-            var wSpell = _menus.DrawMenu["DW"].Cast<CheckBox>().CurrentValue;
-            var eSpell = _menus.DrawMenu["DE"].Cast<CheckBox>().CurrentValue;
-            if (qSpell) Circle.Draw(Color.AliceBlue, _spells.Q.Range, Player.Instance.Position);
-            if (wSpell) Circle.Draw(Color.AliceBlue, _spells.W.Range, Player.Instance.Position);
-            if (eSpell) Circle.Draw(Color.DarkGray, _spells.E.Range, Player.Instance.Position);
+                 var qSpell = _menus.DrawMenu["DQ"].Cast<CheckBox>().CurrentValue;
+               var wSpell = _menus.DrawMenu["DW"].Cast<CheckBox>().CurrentValue;
+             var eSpell = _menus.DrawMenu["DE"].Cast<CheckBox>().CurrentValue;
+             if (qSpell)
+            Circle.Draw(Color.AliceBlue, _spells.Q.Range, Player.Instance.Position);
+             if (wSpell) 
+            Circle.Draw(Color.AliceBlue, _spells.W.Range, Player.Instance.Position);
+            if (eSpell) 
+            Circle.Draw(Color.DarkGray, _spells.E.Range, Player.Instance.Position);
 
         }
 
@@ -72,7 +76,10 @@ namespace KonohaRyzeReworked
 
         private  void OnLoad(EventArgs args)
         {
-            Game.OnUpdate += Update;
+            Game.OnUpdate += Update;       
+            _modes = new Modes();
+            _menus = new Menus();
+            _spells = new Spells();
             Drawing.OnDraw += Draw;
         }
     }

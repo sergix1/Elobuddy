@@ -11,7 +11,7 @@ namespace KonohaRyzeReworked
     {
         static void Main(string[] args)
         {
-            if (Player.Instance.Hero != Champion.Ryze) return;
+            //if (ObjectManager.Player.Hero != Champion.Ryze) return;
           var n=  new RyzeMain();
         }
     }
