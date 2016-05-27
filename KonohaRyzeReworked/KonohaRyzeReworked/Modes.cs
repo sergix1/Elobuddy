@@ -16,12 +16,50 @@ namespace KonohaRyzeReworked
         {
 
         }
+      public  List<String> functions = new List<String>();
+       public int i;
+      public  bool rev;
+        public bool qcast;
         public void update(RyzeMain ryze)
         {
-          
-            if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Combo)
+       if(ryze.GetPassiveBuff==0)
+            {
+                i = 0;
+                functions = null;
+                rev = false;
+            }
+            if (functions != null)
+            {
+                if (i<functions.Count)
+                {
+                   
+                    sendSpell(functions[i], ryze);
+                    if (rev)
+                    {
+              
+                        i++;
+                        rev = false;
+                    }
+                }
+                else
+                {
+               
+                    i = 0;
+                    functions = null;
+                    rev = false;
+                } 
+                
+            }
+                if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Combo)
             {
                 Combo(ryze);
+            }
+            else
+            {
+  
+                i = 0;
+                rev = false;
+                functions =null;
             }
             if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Harass)
             {
@@ -31,9 +69,126 @@ namespace KonohaRyzeReworked
             {
                 Laneclear(ryze);
             }
+      
+        }
+        public void ComboAuto(RyzeMain ryze)
+        {
+
+        }
+    public bool sendSpell(string s,RyzeMain ryze)
+        {
+            switch(s)
+            {
+                case "Q":
+                  
+                    return ryze.SpellsObj.Qcast();
+                  
+                case "W":
+              
+                    return ryze.SpellsObj.Wcast();
            
+                case "E":
+                
+                    return ryze.SpellsObj.Ecast();
+                case "R":
+                    return ryze.SpellsObj.Rcast();
+
+            }
+            return false;
         }
         public void Combo(RyzeMain ryze)
+        {
+            var target = TargetSelector.GetTarget(570, DamageType.Magical);
+
+            if (target != null)
+            {
+                if (functions == null)
+                {
+                    if (ryze.SpellsObj.Q.IsReady() && ryze.SpellsObj.W.IsReady() && ryze.SpellsObj.E.IsReady() && ryze.SpellsObj.R.IsReady())
+                    {
+                        switch (ryze.GetPassiveBuff)
+                        {
+                            case 1:
+                                functions = new List<String> { "R", "E", "Q", "W", "Q", "E", "Q", "W", "Q","E" };
+                                break;
+                            case 2:
+                                functions = new List<String> { "R", "Q", "W", "Q", "E", "Q", "W", "Q", "E" };
+                                break;
+                            case 3:
+                                functions = new List<String> { "R", "W", "Q", "E", "Q", "Q", "W", "Q", "E", "Q", "W", "Q", "E", "Q", "W", "Q", "E", "Q", "W", "Q", "E" };
+                                break;
+                            case 4:
+                                functions = new List<String> { "R", "W", "Q", "E", "W", "Q", "E" };
+                                break;
+                        }
+                    }
+
+                    else if (ryze.SpellsObj.Q.IsReady() && ryze.SpellsObj.W.IsReady() && ryze.SpellsObj.E.IsReady() && !ryze.SpellsObj.R.IsReady())
+
+                    { switch (ryze.GetPassiveBuff)
+                        {
+                            case 2:
+                                functions = new List<String> { "Q", "E", "W", "Q", "E", "Q", "W", "Q", "E" };
+                                break;
+                            case 3:
+                                functions = new List<String> { "Q", "W", "Q", "E", "Q", "W", "Q", "E" };
+                                break;
+                            case 4:
+                                functions = new List<String> { "W", "Q", "E", "Q", "W", "Q", "E", "Q", "W", "E", "Q" };
+                                break;
+                        }
+                }
+                else
+                {
+
+                        if (ryze.GetPassiveBuff == 5)
+                        {
+                            if (qcast)
+
+                                ryze.SpellsObj.Qcast();
+                            else
+                            {
+                                if (ryze.SpellsObj.W.IsReady())
+                                    ryze.SpellsObj.Wcast();
+                                else if (ryze.SpellsObj.E.IsReady())
+                                    ryze.SpellsObj.Ecast();
+                                else
+                                    ryze.SpellsObj.QcastObj();
+
+
+                            }
+                        }
+                        else
+                        {
+                            if(ryze.SpellsObj.Q.IsReady())
+                            {
+                                ryze.SpellsObj.Qcast();
+                            }
+                            else if(ryze.SpellsObj.W.IsReady())
+                            {
+                                ryze.SpellsObj.Wcast();
+                            }
+                            else if (ryze.SpellsObj.E.IsReady())
+                            {
+                                ryze.SpellsObj.Ecast();
+                            }
+                        }
+
+                        
+
+
+                        
+                    }
+                 
+                }
+            }
+            else
+            {
+               
+
+            }
+        }
+        public void ComboSlutty(RyzeMain ryze)
         {
             var target = TargetSelector.GetTarget(570, DamageType.Magical);
             
@@ -157,7 +312,34 @@ namespace KonohaRyzeReworked
                 }
             }
         }
+        public void onProcessSpell(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        {
 
+                if (functions != null)
+                {
+                    if (functions[i] == "Q")
+                        if (args.Slot == SpellSlot.Q)
+                        {
+                            rev = true;
+                        }
+                    if (functions[i] == "W")
+                        if (args.Slot == SpellSlot.E)
+                        {
+                            rev = true;
+                        }
+                    if (functions[i] == "E")
+                        if (args.Slot == SpellSlot.E)
+                        {
+                            rev = true;
+                        }
+                    if (functions[i] == "R")
+                        if (args.Slot == SpellSlot.R)
+                        {
+                            rev = true;
+                        }
+                }
+
+        }
         public void Laneclear(RyzeMain ryze)
         {
             var laneclearQ = ryze.Menu.LaneClearMenu["LQ"].Cast<CheckBox>().CurrentValue;

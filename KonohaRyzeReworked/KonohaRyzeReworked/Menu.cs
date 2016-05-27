@@ -18,7 +18,6 @@ namespace KonohaRyzeReworked
         public  Menu menu, ComboMenu, DrawMenu, HarrashMenu, LaneClearMenu;
         public Menus()
         {
-            Chat.Print("hEY BODDT");
             load();
         }
         private void load()

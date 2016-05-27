@@ -60,7 +60,81 @@ namespace KonohaRyzeReworked
             _e = new Spell.Targeted(SpellSlot.E, 600);
             _r = new Spell.Active(SpellSlot.R);
         }
+        public bool QcastObj()
+        {
+            var target = TargetSelector.GetTarget(_q.Range, DamageType.Magical);
+            if (target != null)
+            {
+                 var qpred = _q.GetPrediction(target);
 
+                     if (_q.GetPrediction(target).HitChance == HitChance.High)
+                   {
+                if (_q.Cast(target.Position))
+                {
+
+
+                    return true;
+                }
+                     }
+            
+            }
+            return false;
+
+
+        }
+        public bool Qcast()
+        {
+            var target = TargetSelector.GetTarget(_q.Range, DamageType.Magical);
+            if (target != null)
+            {
+             //   var qpred = _q.GetPrediction(target);
+
+           //     if (_q.GetPrediction(target).HitChance == HitChance.High)
+            //    {
+                    if (_q.Cast(target.Position))
+                    {
+
+                 
+                        return true;
+                    }
+           //     }
+                
+            }
+            return false;
+
+       
+        }
+        public bool Rcast()
+        {
+          
+      R.Cast();
+            return false;
+            
+        }
+        public bool Wcast()
+        {
+            var target = TargetSelector.GetTarget(_w.Range, DamageType.Magical);
+            if (target != null)
+            {
+                if (_w.Cast(target))
+                {
+                
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool Ecast()
+        {
+            var target = TargetSelector.GetTarget(_e.Range, DamageType.Magical);
+            if (target != null)
+            {
+                if (_e.Cast(target))
+
+                return true;
+            }
+            return false;
+        }
         public float QDamage(Obj_AI_Base target)
         {
             return ObjectManager.Player.CalculateDamageOnUnit(
@@ -100,7 +174,7 @@ namespace KonohaRyzeReworked
                 damage += WDamage(enemy);
             return damage;
         }
-        public static void Initialize(DamageToUnitDelegate damageToUnit)
+        public  void Initialize(DamageToUnitDelegate damageToUnit)
         {
             // Apply needed field delegate for damage calculation
             DamageToUnit = damageToUnit;
@@ -110,7 +184,7 @@ namespace KonohaRyzeReworked
             // Register event handlers
             Drawing.OnEndScene += DrawDamage;
         }
-        public static void DrawDamage(EventArgs args)
+        public void DrawDamage(EventArgs args)
         {
 
             foreach (var unit in EntityManager.Heroes.Enemies.Where(h => h.IsValid && h.IsHPBarRendered))
@@ -134,8 +208,8 @@ namespace KonohaRyzeReworked
                 Drawing.DrawLine(startPoint, endPoint, 9, System.Drawing.Color.Red);
             }
         }
-
-        public static Color DrawingColor { get; set; }
+ 
+        public  Color DrawingColor { get; set; }
     }
 }
 

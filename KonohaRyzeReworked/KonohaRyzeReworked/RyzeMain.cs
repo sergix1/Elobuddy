@@ -16,15 +16,15 @@ namespace KonohaRyzeReworked
 {
     class RyzeMain
     {
-       private Spells _spells;
+        private Spells _spells;
         private Modes _modes;
-       private Menus _menus;
+        private Menus _menus;
         public AIHeroClient Hero
         {
             get
             {
-                if(ObjectManager.Player==null)
-                Console.WriteLine("nullisimo");
+                if (ObjectManager.Player == null)
+                    Console.WriteLine("nullisimo");
                 return ObjectManager.Player;
             }
         }
@@ -32,36 +32,45 @@ namespace KonohaRyzeReworked
         {
             get { return _menus; }
         }
-        public Spells SpellsObj {
-            get{ return _spells;}
-           
-            }
+        public Spells SpellsObj
+        {
+            get { return _spells; }
+
+        }
         public RyzeMain()
         {
-            Chat.Print("ryze loaded");
-    
+
+
             Loading.OnLoadingComplete += OnLoad;
-         
+
+        }
+        public void OnProcessSpell()
+        {
+
         }
         public void Update(EventArgs updateArgs)
         {
             _modes.update(this);
         }
+        public void onprocess()
+        {
+
+        }
         public void Draw(EventArgs drawingArgs)
         {
-                 var qSpell = _menus.DrawMenu["DQ"].Cast<CheckBox>().CurrentValue;
-               var wSpell = _menus.DrawMenu["DW"].Cast<CheckBox>().CurrentValue;
-             var eSpell = _menus.DrawMenu["DE"].Cast<CheckBox>().CurrentValue;
-             if (qSpell)
-            Circle.Draw(Color.AliceBlue, _spells.Q.Range, Player.Instance.Position);
-             if (wSpell) 
-            Circle.Draw(Color.AliceBlue, _spells.W.Range, Player.Instance.Position);
-            if (eSpell) 
-            Circle.Draw(Color.DarkGray, _spells.E.Range, Player.Instance.Position);
+            var qSpell = _menus.DrawMenu["DQ"].Cast<CheckBox>().CurrentValue;
+            var wSpell = _menus.DrawMenu["DW"].Cast<CheckBox>().CurrentValue;
+            var eSpell = _menus.DrawMenu["DE"].Cast<CheckBox>().CurrentValue;
+            if (qSpell)
+                Circle.Draw(Color.AliceBlue, _spells.Q.Range, Player.Instance.Position);
+            if (wSpell)
+                Circle.Draw(Color.AliceBlue, _spells.W.Range, Player.Instance.Position);
+            if (eSpell)
+                Circle.Draw(Color.DarkGray, _spells.E.Range, Player.Instance.Position);
 
         }
 
-        public  int GetPassiveBuff
+        public int GetPassiveBuff
         {
             get
             {
@@ -74,13 +83,60 @@ namespace KonohaRyzeReworked
             }
         }
 
-        private  void OnLoad(EventArgs args)
+        private void OnLoad(EventArgs args)
         {
-            Game.OnUpdate += Update;       
+            Game.OnUpdate += Update;
             _modes = new Modes();
             _menus = new Menus();
             _spells = new Spells();
+            Obj_AI_Base.OnProcessSpellCast += OnProcessSpell;
             Drawing.OnDraw += Draw;
+        }
+
+        private void OnProcessSpell(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        {
+            if (sender.IsMe)
+            {
+                if (_modes.functions != null)
+                {
+                    if (_modes.functions[_modes.i] == "Q")
+                        if (args.Slot == SpellSlot.Q)
+                        {
+                            _modes.rev = true;
+                        }
+                    if (_modes.functions[_modes.i] == "W")
+                        if (args.Slot == SpellSlot.W)
+                        {
+                            _modes.rev = true;
+                        }
+                    if (_modes.functions[_modes.i] == "E")
+                        if (args.Slot == SpellSlot.E)
+                        {
+                            _modes.rev = true;
+                        }
+                    if (_modes.functions[_modes.i] == "R")
+                        if (args.Slot == SpellSlot.R)
+                        {
+                            _modes.rev = true;
+                        }
+
+                }
+                else
+                {
+                    if (args.Slot == SpellSlot.Q)
+                    {
+                        _modes.qcast = false;
+                    }
+                    if (args.Slot == SpellSlot.W)
+                    {
+                        _modes.qcast = true;
+                    }
+                    if (args.Slot == SpellSlot.E)
+                    {
+                        _modes.qcast = true;
+                    }
+                }
+            }
         }
     }
 }
