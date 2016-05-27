@@ -152,11 +152,15 @@ namespace KonohaRyzeReworked
                                     ryze.SpellsObj.Wcast();
                                 else if (ryze.SpellsObj.E.IsReady())
                                     ryze.SpellsObj.Ecast();
-                                else
+                                else if(ryze.SpellsObj.Q.IsReady())
                                     ryze.SpellsObj.QcastObj();
-
+                                else if (ryze.SpellsObj.R.IsReady())
+                                {
+                                    ryze.SpellsObj.Rcast();
+                                }
 
                             }
+                         
                         }
                         else
                         {
