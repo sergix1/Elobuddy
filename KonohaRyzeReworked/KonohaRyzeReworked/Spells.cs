@@ -108,7 +108,7 @@ namespace KonohaRyzeReworked
         {
           
       R.Cast();
-            return false;
+            return true;
             
         }
         public bool Wcast()

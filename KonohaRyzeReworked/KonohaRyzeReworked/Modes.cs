@@ -16,10 +16,47 @@ namespace KonohaRyzeReworked
         {
 
         }
-      public  List<String> functions = new List<String>();
-       public int i;
-      public  bool rev;
-        public bool qcast;
+      private  List<String> functions = new List<String>();
+        public List<String>  Functions
+        {
+            get
+            {
+                return functions;
+            }
+        }
+       private int i;
+        public int I
+        {
+            get
+            {
+                return i;
+            }
+        }
+      private  bool rev;
+        public bool Rev
+        {
+           get
+        {
+                return rev;
+              
+            }
+            set
+            {
+                rev = value;
+            }
+                }
+       private bool qcast;
+        public bool Qcast
+        {
+            get
+            {
+                return qcast;
+            }
+            set
+            {
+                qcast = value;
+            }
+        }
         public void update(RyzeMain ryze)
         {
        if(ryze.GetPassiveBuff==0)
@@ -108,6 +145,20 @@ namespace KonohaRyzeReworked
                     {
                         switch (ryze.GetPassiveBuff)
                         {
+                            case 0:
+                                if (ryze.SpellsObj.Q.IsReady())
+                                {
+                                    ryze.SpellsObj.Qcast();
+                                }
+                                else if (ryze.SpellsObj.W.IsReady())
+                                {
+                                    ryze.SpellsObj.Wcast();
+                                }
+                                else if (ryze.SpellsObj.E.IsReady())
+                                {
+                                    ryze.SpellsObj.Ecast();
+                                }
+                                break;
                             case 1:
                                 functions = new List<String> { "R", "E", "Q", "W", "Q", "E", "Q", "W", "Q","E" };
                                 break;
@@ -115,7 +166,7 @@ namespace KonohaRyzeReworked
                                 functions = new List<String> { "R", "Q", "W", "Q", "E", "Q", "W", "Q", "E" };
                                 break;
                             case 3:
-                                functions = new List<String> { "R", "W", "Q", "E", "Q", "Q", "W", "Q", "E", "Q", "W", "Q", "E", "Q", "W", "Q", "E", "Q", "W", "Q", "E" };
+                                functions = new List<String> { "R", "W", "Q", "E", "Q", "Q", "W", "Q", "E", "Q" };
                                 break;
                             case 4:
                                 functions = new List<String> { "R", "W", "Q", "E", "W", "Q", "E" };
@@ -127,6 +178,34 @@ namespace KonohaRyzeReworked
 
                     { switch (ryze.GetPassiveBuff)
                         {
+                            case 0:
+                                if (ryze.SpellsObj.Q.IsReady())
+                                {
+                                    ryze.SpellsObj.Qcast();
+                                }
+                                else if (ryze.SpellsObj.W.IsReady())
+                                {
+                                    ryze.SpellsObj.Wcast();
+                                }
+                                else if (ryze.SpellsObj.E.IsReady())
+                                {
+                                    ryze.SpellsObj.Ecast();
+                                }
+                                break;
+                            case 1:
+                                if (ryze.SpellsObj.Q.IsReady())
+                                {
+                                    ryze.SpellsObj.Qcast();
+                                }
+                                else if (ryze.SpellsObj.W.IsReady())
+                                {
+                                    ryze.SpellsObj.Wcast();
+                                }
+                                else if (ryze.SpellsObj.E.IsReady())
+                                {
+                                    ryze.SpellsObj.Ecast();
+                                }
+                                break;
                             case 2:
                                 functions = new List<String> { "Q", "E", "W", "Q", "E", "Q", "W", "Q", "E" };
                                 break;
@@ -149,14 +228,22 @@ namespace KonohaRyzeReworked
                             else
                             {
                                 if (ryze.SpellsObj.W.IsReady())
+                                {
+
                                     ryze.SpellsObj.Wcast();
+                                }
                                 else if (ryze.SpellsObj.E.IsReady())
+                                {
                                     ryze.SpellsObj.Ecast();
-                                else if(ryze.SpellsObj.Q.IsReady())
+                                }
+                                else if (ryze.SpellsObj.Q.IsReady())
+                                {
                                     ryze.SpellsObj.QcastObj();
+                                }
                                 else if (ryze.SpellsObj.R.IsReady())
                                 {
                                     ryze.SpellsObj.Rcast();
+                                    Console.WriteLine("hI");
                                 }
 
                             }

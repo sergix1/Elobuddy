@@ -97,27 +97,27 @@ namespace KonohaRyzeReworked
         {
             if (sender.IsMe)
             {
-                if (_modes.functions != null)
+                if (_modes.Functions != null)
                 {
-                    if (_modes.functions[_modes.i] == "Q")
+                    if (_modes.Functions[_modes.I] == "Q")
                         if (args.Slot == SpellSlot.Q)
                         {
-                            _modes.rev = true;
+                            _modes.Rev = true;
                         }
-                    if (_modes.functions[_modes.i] == "W")
+                    if (_modes.Functions[_modes.I] == "W")
                         if (args.Slot == SpellSlot.W)
                         {
-                            _modes.rev = true;
+                            _modes.Rev = true;
                         }
-                    if (_modes.functions[_modes.i] == "E")
+                    if (_modes.Functions[_modes.I] == "E")
                         if (args.Slot == SpellSlot.E)
                         {
-                            _modes.rev = true;
+                            _modes.Rev = true;
                         }
-                    if (_modes.functions[_modes.i] == "R")
+                    if (_modes.Functions[_modes.I] == "R")
                         if (args.Slot == SpellSlot.R)
                         {
-                            _modes.rev = true;
+                            _modes.Rev = true;
                         }
 
                 }
@@ -125,15 +125,19 @@ namespace KonohaRyzeReworked
                 {
                     if (args.Slot == SpellSlot.Q)
                     {
-                        _modes.qcast = false;
+                        _modes.Qcast = false;
                     }
                     if (args.Slot == SpellSlot.W)
                     {
-                        _modes.qcast = true;
+                        _modes.Qcast = true;
                     }
                     if (args.Slot == SpellSlot.E)
                     {
-                        _modes.qcast = true;
+                        _modes.Qcast = true;
+                    }
+                    if (args.Slot == SpellSlot.R)
+                    {
+                        _modes.Qcast = true;
                     }
                 }
             }
