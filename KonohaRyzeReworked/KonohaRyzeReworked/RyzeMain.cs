@@ -93,54 +93,62 @@ namespace KonohaRyzeReworked
             Drawing.OnDraw += Draw;
         }
 
+        float oldtime;
         private void OnProcessSpell(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
+         
             if (sender.IsMe)
             {
-                if (_modes.Functions != null)
-                {
-                    if (_modes.Functions[_modes.I] == "Q")
+        
+             //   if ((Game.Time - oldtime) > 0.4)
+              //         {
+             //       Chat.Print("Time : " + (Game.Time - oldtime) + "");
+                    if (_modes.Functions != null)
+                    {
+                        if (_modes.Functions[_modes.I] == "Q")
+                            if (args.Slot == SpellSlot.Q)
+                            {
+                                _modes.Rev = true;
+                            }
+                        if (_modes.Functions[_modes.I] == "W")
+                            if (args.Slot == SpellSlot.W)
+                            {
+                                _modes.Rev = true;
+                            }
+                        if (_modes.Functions[_modes.I] == "E")
+                            if (args.Slot == SpellSlot.E)
+                            {
+                                _modes.Rev = true;
+                            }
+                        if (_modes.Functions[_modes.I] == "R")
+                            if (args.Slot == SpellSlot.R)
+                            {
+                                _modes.Rev = true;
+                            }
+
+                    }
+                    else
+                    {
                         if (args.Slot == SpellSlot.Q)
                         {
-                            _modes.Rev = true;
+                            _modes.Qcast = false;
                         }
-                    if (_modes.Functions[_modes.I] == "W")
                         if (args.Slot == SpellSlot.W)
                         {
-                            _modes.Rev = true;
+                            _modes.Qcast = true;
                         }
-                    if (_modes.Functions[_modes.I] == "E")
                         if (args.Slot == SpellSlot.E)
                         {
-                            _modes.Rev = true;
+                            _modes.Qcast = true;
                         }
-                    if (_modes.Functions[_modes.I] == "R")
                         if (args.Slot == SpellSlot.R)
                         {
-                            _modes.Rev = true;
+                            _modes.Qcast = true;
                         }
-
-                }
-                else
-                {
-                    if (args.Slot == SpellSlot.Q)
-                    {
-                        _modes.Qcast = false;
-                    }
-                    if (args.Slot == SpellSlot.W)
-                    {
-                        _modes.Qcast = true;
-                    }
-                    if (args.Slot == SpellSlot.E)
-                    {
-                        _modes.Qcast = true;
-                    }
-                    if (args.Slot == SpellSlot.R)
-                    {
-                        _modes.Qcast = true;
                     }
                 }
-            }
+          //      oldtime = Game.Time;
+         //   }
         }
     }
 }
