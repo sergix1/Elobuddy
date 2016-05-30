@@ -23,8 +23,7 @@ namespace KonohaRyzeReworked
         {
             get
             {
-                if (ObjectManager.Player == null)
-                    Console.WriteLine("nullisimo");
+             
                 return ObjectManager.Player;
             }
         }
@@ -61,6 +60,7 @@ namespace KonohaRyzeReworked
             var qSpell = _menus.DrawMenu["DQ"].Cast<CheckBox>().CurrentValue;
             var wSpell = _menus.DrawMenu["DW"].Cast<CheckBox>().CurrentValue;
             var eSpell = _menus.DrawMenu["DE"].Cast<CheckBox>().CurrentValue;
+          
             if (qSpell)
                 Circle.Draw(Color.AliceBlue, _spells.Q.Range, Player.Instance.Position);
             if (wSpell)
@@ -91,6 +91,7 @@ namespace KonohaRyzeReworked
             _spells = new Spells();
             Obj_AI_Base.OnProcessSpellCast += OnProcessSpell;
             Drawing.OnDraw += Draw;
+         //   Drawing.OnEndScene += _spells.DrawDamage;
         }
 
         float oldtime;

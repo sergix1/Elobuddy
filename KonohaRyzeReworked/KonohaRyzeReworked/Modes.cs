@@ -135,7 +135,7 @@ namespace KonohaRyzeReworked
         }
         public void Combo(RyzeMain ryze)
         {
-            Chat.Print(ryze.GetPassiveBuff);
+  
             var target = TargetSelector.GetTarget(570, DamageType.Magical);
 
             if (target != null)
@@ -258,7 +258,7 @@ namespace KonohaRyzeReworked
                 var qpred = ryze.SpellsObj.Q.GetPrediction(target);
                 if (qSpell)
                 {
-                    if (ryze.SpellsObj.Q.GetPrediction(target).HitChance == HitChance.High)
+                    if (ryze.SpellsObj.Q.GetPrediction(target).HitChance >= HitChance.High)
                     {
                         ryze.SpellsObj.Q.Cast(target);
                     }

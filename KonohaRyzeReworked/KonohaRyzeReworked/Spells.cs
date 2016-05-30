@@ -67,7 +67,7 @@ namespace KonohaRyzeReworked
             {
                  var qpred = _q.GetPrediction(target);
 
-                     if (_q.GetPrediction(target).HitChance == HitChance.High)
+                     if (_q.GetPrediction(target).HitChance >= HitChance.High)
                    {
                 if (_q.Cast(target.Position))
                 {
