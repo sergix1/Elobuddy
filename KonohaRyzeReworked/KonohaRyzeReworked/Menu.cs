@@ -15,7 +15,7 @@ namespace KonohaRyzeReworked
 {
     class Menus
     {
-        public  Menu menu, ComboMenu, DrawMenu, HarrashMenu, LaneClearMenu;
+        public  Menu menu, ComboMenu, DrawMenu, HarrashMenu, LaneClearMenu,JungleclearMenu;
         public Menus()
         {
             load();
@@ -24,30 +24,24 @@ namespace KonohaRyzeReworked
         {
    
                menu =  MainMenu.AddMenu("Ryze", "Ryze");
-
-              ComboMenu = menu.AddSubMenu("Combo", "combo");
               HarrashMenu = menu.AddSubMenu("Harrash", "Harrash");
-              HarrashMenu.Add("HMANA", new Slider("Min. mana for harrash :", 40, 0, 100));
-
+            HarrashMenu.Add("HMANA", new Slider("Min. mana for harrash :", 40, 0, 100));
               LaneClearMenu = menu.AddSubMenu("Laneclear", "Laneclear");
               LaneClearMenu.Add("LQ", new CheckBox("Use Q"));
               LaneClearMenu.Add("LW", new CheckBox("Use W"));
               LaneClearMenu.Add("LE", new CheckBox("Use E"));
               LaneClearMenu.Add("LR", new CheckBox("Use R"));
               LaneClearMenu.Add("LMANA", new Slider("Min. mana for laneclear :", 0, 0, 100));
-              DrawMenu = menu.AddSubMenu("Draw", "draw");
-
-              HarrashMenu.Add("HQ", new CheckBox("Use Q"));
-              ComboMenu.Add("CQ", new CheckBox("Use Q"));
-              ComboMenu.Add("CE", new CheckBox("Use E"));
-              ComboMenu.Add("CW", new CheckBox("Use W"));
-              ComboMenu.Add("CR", new CheckBox("Use R"));
-              ComboMenu.Add("CRo", new CheckBox("Use R only on Root"));
-              ComboMenu.Add("BlockAA", new CheckBox("Block AutoAttacks on combo"));
+              DrawMenu = menu.AddSubMenu("Draw", "draw"); 
               DrawMenu.Add("DQ", new CheckBox("Draw Q"));
               DrawMenu.Add("DW", new CheckBox("Draw W"));
               DrawMenu.Add("DE", new CheckBox("Draw E"));
-              DrawMenu.Add("DD", new CheckBox("Draw Damage"));
+            DrawMenu.Add("DD", new CheckBox("Draw Damage"));
+            JungleclearMenu = menu.AddSubMenu("Jungleclear", "Jungleclear");
+            JungleclearMenu.Add("JQ", new CheckBox("Use Q"));
+            JungleclearMenu.Add("JW", new CheckBox("Use W"));
+            JungleclearMenu.Add("JE", new CheckBox("Use E"));
+            JungleclearMenu.Add("JR", new CheckBox("Use R"));
 
 
         }

@@ -62,11 +62,14 @@ namespace KonohaRyzeReworked
             var eSpell = _menus.DrawMenu["DE"].Cast<CheckBox>().CurrentValue;
           
             if (qSpell)
-                Circle.Draw(Color.AliceBlue, _spells.Q.Range, Player.Instance.Position);
+                if(_spells.Q.IsReady())
+                Circle.Draw(Color.DeepSkyBlue, _spells.Q.Range, Player.Instance.Position);
             if (wSpell)
-                Circle.Draw(Color.AliceBlue, _spells.W.Range, Player.Instance.Position);
+                if (_spells.W.IsReady())
+                    Circle.Draw(Color.DeepSkyBlue, _spells.W.Range, Player.Instance.Position);
             if (eSpell)
-                Circle.Draw(Color.DarkGray, _spells.E.Range, Player.Instance.Position);
+                if (_spells.E.IsReady())
+                    Circle.Draw(Color.DeepSkyBlue, _spells.E.Range, Player.Instance.Position);
 
         }
 

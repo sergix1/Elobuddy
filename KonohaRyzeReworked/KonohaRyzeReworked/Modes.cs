@@ -108,6 +108,40 @@ namespace KonohaRyzeReworked
             }
       
         }
+        private static void JungleClear(RyzeMain ryze)
+        {
+            var jungleclearQ = ryze.Menu.JungleclearMenu["JQ"].Cast<CheckBox>().CurrentValue;
+            var jungleclearW = ryze.Menu.JungleclearMenu["JW"].Cast<CheckBox>().CurrentValue;
+            var jungleclearE = ryze.Menu.JungleclearMenu["JE"].Cast<CheckBox>().CurrentValue;
+            var jungleclearR = ryze.Menu.JungleclearMenu["JR"].Cast<CheckBox>().CurrentValue;
+            Obj_AI_Base minion =
+                EntityManager.MinionsAndMonsters.GetJungleMonsters(
+
+                    ObjectManager.Player.Position,
+                    600,
+                    true).FirstOrDefault();
+            if (minion != null)
+            {
+                if (jungleclearQ && ryze.SpellsObj.Q.IsReady())
+                {
+                    var Qpred = ryze.SpellsObj.Q.GetPrediction(minion);
+                    ryze.SpellsObj.Q.Cast(Qpred.UnitPosition);
+                }
+                if (jungleclearE && ryze.SpellsObj.E.IsReady())
+                {
+                    ryze.SpellsObj.E.Cast(minion);
+                }
+                if (jungleclearW && ryze.SpellsObj.W.IsReady())
+                {
+                    ryze.SpellsObj.W.Cast(minion);
+                }
+                if (jungleclearR && ryze.SpellsObj.R.IsReady() && (ryze.GetPassiveBuff >= 4 || ryze.Hero.HasBuff("ryzepassivecharged")))
+                {
+                    ryze.SpellsObj.R.Cast();
+                }
+            }
+        }
+
         public void ComboAuto(RyzeMain ryze)
         {
 
@@ -148,16 +182,16 @@ namespace KonohaRyzeReworked
                         {
                        
                             case 1:
-                                functions = new List<String> { "R", "E", "Q", "W", "Q", "E", "Q", "W", "Q","E" };
+                                functions = new List<String> { "R", "E", "Q", "W", "Q", "E", "Q", "W", "Q","E","Q" };
                                 break;
                             case 2:
-                                functions = new List<String> { "R", "Q", "W", "Q", "E", "Q", "W", "Q", "E" };
+                                functions = new List<String> { "R", "Q", "W", "Q", "E", "Q", "W", "Q", "E","Q" };
                                 break;
                             case 3:
-                                functions = new List<String> { "R", "W", "Q", "E", "Q", "Q", "W", "Q", "E", "Q" };
+                                functions = new List<String> { "R", "W", "Q", "E", "Q", "W", "Q", "E", "Q", "W","Q" };
                                 break;
                             case 4:
-                                functions = new List<String> { "R", "W", "Q", "E", "W", "Q", "E" };
+                                functions = new List<String> { "R", "W", "Q", "E", "Q", "W", "Q","E" };
                                 break;
                         }
                     }
@@ -174,7 +208,7 @@ namespace KonohaRyzeReworked
                                 functions = new List<String> { "Q", "W", "Q", "E", "Q", "W", "Q", "E" };
                                 break;
                             case 4:
-                                functions = new List<String> { "W", "Q", "E", "Q", "W", "Q", "E", "Q", "W", "E", "Q" };
+                                functions = new List<String> { "W", "Q", "E", "Q", "W", "Q", "E", "Q", "W", "Q", "E","Q" };
                                 break;
                         }
                 }
