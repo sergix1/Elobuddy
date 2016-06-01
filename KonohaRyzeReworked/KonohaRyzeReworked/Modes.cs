@@ -59,55 +59,60 @@ namespace KonohaRyzeReworked
         }
         public void update(RyzeMain ryze)
         {
-       if(ryze.GetPassiveBuff==0)
-            {
-                i = 0;
-                functions = null;
-                rev = false;
-            }
-            if (functions != null)
-            {
-                if (i<functions.Count)
+            //  if(ryze.GetPassiveBuff==0)
+          //  {
+                //     i = 0;
+                //     functions = null;
+                //    rev = false;
+                //    }
+                if (functions != null)
                 {
-                   
-                    sendSpell(functions[i], ryze);
-                    if (rev)
+                    if (i < functions.Count)
                     {
-              
-                        i++;
+
+                        sendSpell(functions[i], ryze);
+                        if (rev)
+                        {
+
+                            i++;
+                            rev = false;
+                        }
+                    }
+                    else
+                    {
+
+                        i = 0;
+                        functions = null;
                         rev = false;
                     }
+
+                }
+                if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Combo)
+                {
+                    Combo(ryze);
                 }
                 else
                 {
-               
+
                     i = 0;
-                    functions = null;
                     rev = false;
-                } 
-                
+                    functions = null;
+                }
+                if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Harass)
+                {
+                    Harrash(ryze);
+                }
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                {
+                    Laneclear(ryze);
+                }
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+                {
+                    JungleClear(ryze);
+                }
+
             }
-                if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Combo)
-            {
-                Combo(ryze);
-            }
-            else
-            {
-  
-                i = 0;
-                rev = false;
-                functions =null;
-            }
-            if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Harass)
-            {
-                Harrash(ryze);
-            }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
-            {
-                Laneclear(ryze);
-            }
-      
-        }
+        //}
         private static void JungleClear(RyzeMain ryze)
         {
             var jungleclearQ = ryze.Menu.JungleclearMenu["JQ"].Cast<CheckBox>().CurrentValue;
@@ -180,27 +185,28 @@ namespace KonohaRyzeReworked
                     {
                         switch (ryze.GetPassiveBuff)
                         {
-                       
+
                             case 1:
-                                functions = new List<String> { "R", "E", "Q", "W", "Q", "E", "Q", "W", "Q","E","Q" };
+                                functions = new List<String> { "R", "E", "Q", "W", "Q", "E", "Q", "W", "Q", "E", "Q" };
                                 break;
                             case 2:
-                                functions = new List<String> { "R", "Q", "W", "Q", "E", "Q", "W", "Q", "E","Q" };
+                                functions = new List<String> { "R", "Q", "W", "Q", "E", "Q", "W", "Q", "E", "Q" };
                                 break;
                             case 3:
-                                functions = new List<String> { "R", "W", "Q", "E", "Q", "W", "Q", "E", "Q", "W","Q" };
+                                functions = new List<String> { "R", "W", "Q", "E", "Q", "W", "Q", "E", "Q", "W", "Q" };
                                 break;
                             case 4:
-                                functions = new List<String> { "R", "W", "Q", "E", "Q", "W", "Q","E" };
+                                functions = new List<String> { "R", "W", "Q", "E", "Q", "W", "Q", "E" };
                                 break;
                         }
                     }
 
-                    else if (ryze.SpellsObj.Q.IsReady() && ryze.SpellsObj.W.IsReady() && ryze.SpellsObj.E.IsReady() && !ryze.SpellsObj.R.IsReady()&& ryze.GetPassiveBuff>1)
+                    else if (ryze.SpellsObj.Q.IsReady() && ryze.SpellsObj.W.IsReady() && ryze.SpellsObj.E.IsReady() && !ryze.SpellsObj.R.IsReady() && ryze.GetPassiveBuff > 1)
 
-                    { switch (ryze.GetPassiveBuff)
+                    {
+                        switch (ryze.GetPassiveBuff)
                         {
-                            
+
                             case 2:
                                 functions = new List<String> { "Q", "E", "W", "Q", "E", "Q", "W", "Q", "E" };
                                 break;
@@ -208,16 +214,16 @@ namespace KonohaRyzeReworked
                                 functions = new List<String> { "Q", "W", "Q", "E", "Q", "W", "Q", "E" };
                                 break;
                             case 4:
-                                functions = new List<String> { "W", "Q", "E", "Q", "W", "Q", "E", "Q", "W", "Q", "E","Q" };
+                                functions = new List<String> { "W", "Q", "E", "Q", "W", "Q", "E", "Q", "W", "Q", "E", "Q" };
                                 break;
                         }
-                }
-                else
+                    }
+                    else
                 {
 
                         if (ryze.Hero.HasBuff("ryzepassivecharged"))
                         {
-                       
+                       Console.WriteLine("Hey tengo 5 cargas");
                             if (qcast)
                             {
                                 if (ryze.SpellsObj.Q.IsReady())
