@@ -97,17 +97,16 @@ namespace KonohaRyzeReworked
          //   Drawing.OnEndScene += _spells.DrawDamage;
         }
 
-        float oldtime;
+        public float oldtime;
         private void OnProcessSpell(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
          
             if (sender.IsMe)
             {
-        
-             //   if ((Game.Time - oldtime) > 0.4)
-              //         {
-             //       Chat.Print("Time : " + (Game.Time - oldtime) + "");
-                    if (_modes.Functions != null)
+                //   if ((Game.Time - oldtime) > 0.4)
+                //         {
+                       Chat.Print("Time : " + (Game.Time - oldtime) + "");
+                if (_modes.Functions != null)
                     {
                         if (_modes.Functions[_modes.I] == "Q")
                             if (args.Slot == SpellSlot.Q)
@@ -150,8 +149,9 @@ namespace KonohaRyzeReworked
                             _modes.Qcast = true;
                         }
                     }
-                }
-          //      oldtime = Game.Time;
+                oldtime = Environment.TickCount;
+            }
+           
          //   }
         }
     }

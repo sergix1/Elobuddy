@@ -9,3 +9,4 @@ C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRy
 C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\bin\Debug\EloBuddy.Sandbox.dll
 C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\obj\Debug\KonohaRyzeReworked.exe
 C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\obj\Debug\KonohaRyzeReworked.pdb
+C:\Users\sergi\Documents\Visual Studio 2015\Projects\KonohaRyzeReworked\KonohaRyzeReworked\obj\Debug\KonohaRyzeReworked.csprojResolveAssemblyReference.cache

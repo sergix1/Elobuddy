@@ -59,12 +59,12 @@ namespace KonohaRyzeReworked
         }
         public void update(RyzeMain ryze)
         {
-            //  if(ryze.GetPassiveBuff==0)
-          //  {
-                //     i = 0;
-                //     functions = null;
-                //    rev = false;
-                //    }
+
+            var minCast= ryze.Menu.HumanizerMenu["SliderH"].Cast<Slider>().CurrentValue;
+            var activeh = ryze.Menu.HumanizerMenu["Active"].Cast<CheckBox>().CurrentValue;
+            if ((activeh&&(Environment.TickCount - ryze.oldtime) <minCast)||(!activeh))
+               
+            {
                 if (functions != null)
                 {
                     if (i < functions.Count)
@@ -112,6 +112,7 @@ namespace KonohaRyzeReworked
                 }
 
             }
+        }
         //}
         private static void JungleClear(RyzeMain ryze)
         {
@@ -223,7 +224,6 @@ namespace KonohaRyzeReworked
 
                         if (ryze.Hero.HasBuff("ryzepassivecharged"))
                         {
-                       Console.WriteLine("Hey tengo 5 cargas");
                             if (qcast)
                             {
                                 if (ryze.SpellsObj.Q.IsReady())
@@ -242,14 +242,15 @@ namespace KonohaRyzeReworked
 
                                     ryze.SpellsObj.Wcast();
                                 }
-                                else if (ryze.SpellsObj.R.IsReady())
-                                {
-                                   
-                                    ryze.SpellsObj.Rcast();
-                                }
+                        
                                 else if (ryze.SpellsObj.E.IsReady())
                                 {
                                     ryze.SpellsObj.Ecast();
+                                }
+                                else if (ryze.SpellsObj.R.IsReady())
+                                {
+
+                                    ryze.SpellsObj.Rcast();
                                 }
 
 

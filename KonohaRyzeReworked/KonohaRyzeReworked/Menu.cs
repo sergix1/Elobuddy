@@ -15,7 +15,7 @@ namespace KonohaRyzeReworked
 {
     class Menus
     {
-        public  Menu menu, ComboMenu, DrawMenu, HarrashMenu, LaneClearMenu,JungleclearMenu;
+        public  Menu menu, ComboMenu, DrawMenu, HarrashMenu, LaneClearMenu,JungleclearMenu,HumanizerMenu;
         public Menus()
         {
             load();
@@ -42,7 +42,9 @@ namespace KonohaRyzeReworked
             JungleclearMenu.Add("JW", new CheckBox("Use W"));
             JungleclearMenu.Add("JE", new CheckBox("Use E"));
             JungleclearMenu.Add("JR", new CheckBox("Use R"));
-
+            HumanizerMenu = menu.AddSubMenu("Humanizer", "Humanizer");
+            HumanizerMenu.Add("Active", new CheckBox("Active"));
+            HumanizerMenu.Add("SliderH", new Slider("Max ticks/s for cast :", 400, 0, 1000));
 
         }
     }
