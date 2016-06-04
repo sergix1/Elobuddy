@@ -44,8 +44,8 @@ namespace KonohaRyzeReworked
             JungleclearMenu.Add("JR", new CheckBox("Use R"));
             HumanizerMenu = menu.AddSubMenu("Humanizer", "Humanizer");
             HumanizerMenu.Add("Active", new CheckBox("Active"));
-            HumanizerMenu.Add("SliderH", new Slider("Max ticks/s for cast :", 400, 0, 1000));
-
+            HumanizerMenu.Add("SliderH", new Slider("Max ticks/s for cast :", 500, 0, 1000));
+            HumanizerMenu.Add("SliderHM", new Slider("Min ticks/s for cast :", 250, 0, 1000));
         }
     }
 }

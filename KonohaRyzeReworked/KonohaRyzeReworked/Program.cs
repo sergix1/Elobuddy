@@ -12,15 +12,11 @@ namespace KonohaRyzeReworked
     {
         static void Main(string[] args)
         {
-            Loading.OnLoadingComplete += OnLoad;
-     
-        }
 
-        private static void OnLoad(EventArgs args)
-        {
-            if (ObjectManager.Player.Hero != Champion.Ryze) return;
+  
             var n = new RyzeMain();
-
         }
+
+ 
     }
 }

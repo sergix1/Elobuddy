@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EloBuddy.SDK.Enumerations;
 using EloBuddy.SDK.Events;
-
+using System.Diagnostics;
 using EloBuddy.SDK.Menu.Values;
 
 using EloBuddy;
@@ -18,6 +18,22 @@ namespace KonohaRyzeReworked
     {
         private Spells _spells;
         private Modes _modes;
+        Humanizer humanizer;
+        System.Diagnostics.Stopwatch _stopWatch;
+        public Stopwatch Time
+        {
+           get
+            {
+                return _stopWatch;
+            }
+        }
+        public Modes Modes
+        {
+            get
+            {
+                return _modes;
+            }
+        }
         private Menus _menus;
         public AIHeroClient Hero
         {
@@ -49,7 +65,7 @@ namespace KonohaRyzeReworked
         }
         public void Update(EventArgs updateArgs)
         {
-            _modes.update(this);
+            humanizer.Humanize(this);
         }
         public void onprocess()
         {
@@ -85,19 +101,27 @@ namespace KonohaRyzeReworked
                 return 0;
             }
         }
-
+        Humanizer h;
         private void OnLoad(EventArgs args)
         {
-            Game.OnUpdate += Update;
+            if (ObjectManager.Player.Hero != Champion.Ryze) return;
+            _stopWatch = new Stopwatch();
+            _stopWatch.Start();
+          humanizer=new Humanizer();
+   
             _modes = new Modes();
             _menus = new Menus();
             _spells = new Spells();
+            Game.OnUpdate += Update;
             Obj_AI_Base.OnProcessSpellCast += OnProcessSpell;
             Drawing.OnDraw += Draw;
+        ;
          //   Drawing.OnEndScene += _spells.DrawDamage;
         }
 
         public float oldtime;
+      public  float time_wait;
+        public Random random = new Random(Environment.TickCount);
         private void OnProcessSpell(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
          
@@ -105,7 +129,7 @@ namespace KonohaRyzeReworked
             {
                 //   if ((Game.Time - oldtime) > 0.4)
                 //         {
-                       Chat.Print("Time : " + (Game.Time - oldtime) + "");
+
                 if (_modes.Functions != null)
                     {
                         if (_modes.Functions[_modes.I] == "Q")
@@ -149,7 +173,16 @@ namespace KonohaRyzeReworked
                             _modes.Qcast = true;
                         }
                     }
-                oldtime = Environment.TickCount;
+                var maxCast = Menu.HumanizerMenu["SliderH"].Cast<Slider>().CurrentValue;
+                var minCast = Menu.HumanizerMenu["SliderHM"].Cast<Slider>().CurrentValue;
+                try
+                {
+                    time_wait = random.Next(minCast, maxCast);
+                }
+                catch {
+                    Console.WriteLine("The big is the other man!");
+                }
+                oldtime =_stopWatch.ElapsedMilliseconds;
             }
            
          //   }
